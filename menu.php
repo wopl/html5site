@@ -43,10 +43,17 @@
 		echo "<a href='index.php?section=about'><span>About</span></a></li>";
 
 		if ($section == "contact"){
-			   echo "<li class='active last'>";
+			   echo "<li class='active'>";
 		} else {
 			   echo "<li>";
 		}
 		echo "<a href='index.php?section=contact'><span>Contact</span></a></li>";
+
+		if ($section == "database"){
+			   echo "<li class='active last'>";
+		} else {
+			   echo "<li>";
+		}
+		echo "<a href='index.php?section=database'><span>Database</span></a></li>";
    ?>
 </ul>
