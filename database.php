@@ -31,7 +31,9 @@ mysql_close($conn);
 -->
 
 <?php
-$mysqli = new mysqli('localhost','db11197344-root','linux4me','db11197344-protrack');
+include "mysql/credentials.inc";
+
+$mysqli = new mysqli($host,$username,$password,$database);
 
 // Verbindung prüfen
 if (mysqli_connect_errno()) {
@@ -42,13 +44,12 @@ if (mysqli_connect_errno()) {
 $query = $mysqli->query ("SELECT clicks FROM counter WHERE id='home'");
 $result = $query->fetch_object();
 	
-echo "Die OO-Seite wurde ";
+echo "<br>Die Seite wurde ";
 echo "{$result->clicks}";
-echo " Mal angesehen";
+echo " Mal angesehen<br>";
 
 $mysqli->query ("UPDATE counter SET clicks = clicks+1 WHERE id='home'");
-
-printf ("\n\nUpdated\n");
+printf ("Updated {$mysqli->affected_rows} rows.<br>");
 
 $mysqli -> close();
 ?>
