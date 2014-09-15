@@ -7,6 +7,13 @@
 database
 <br />
 
+<table class="sqltable">
+	<tr><th>Lorem</th><th>ipsum</th></tr>
+	<tr><th>Lorem</th><th>ipsum</th></tr>
+	<tr><th>Lorem</th><th>ipsum</th></tr>
+	<tr><th>Lorem</th><th>ipsum</th></tr>
+</table>
+
 <!--
 
 $username="db11197344-root";
@@ -51,5 +58,33 @@ echo " Mal angesehen<br>";
 $mysqli->query ("UPDATE counter SET clicks = clicks+1 WHERE id='home'");
 printf ("Updated {$mysqli->affected_rows} rows.<br>");
 
+//-----------------------------------------------------------------------------------
+// Ausgabe der User-Tabelle                                                       ---
+//-----------------------------------------------------------------------------------
+$query = $mysqli->query ("SELECT id, user, firstname, lastname FROM user");
+
+echo "<table class='sqltable' border='0'>\n";
+
+echo "<tr>
+	<th> ID </th>
+	<th> User </th>
+	<th> Vorname </th>
+	<th> Nachname </th>
+	</tr>\n";
+	
+while ($result = $query->fetch_object())
+	{
+	echo "<tr><td>" . "{$result->id}" . "</td>"
+		. "<td>" . "{$result->user}" . "</td>"
+		. "<td>" . "{$result->firstname}" . "</td>"
+		. "<td>" . "{$result->lastname}" . "</td>"
+		. "</tr>\n";
+	}
+echo "</table>";
+$result->close();
+
+
 $mysqli -> close();
+
 ?>
+

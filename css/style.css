@@ -111,3 +111,26 @@ background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAbCAIA
 	color: #FFFFFF;
 
 }
+
+.sqltableone {
+/*	margin-right: 10px; */
+	font-size: 12px;
+/*	background-color: #758596; */
+	background-color: #ba5246;
+	color: white;
+}
+
+.sqltableeven {
+/*	margin-right: 10px; */
+	font-size: 12px;
+	background-color: #f0f0f0;
+	color: black;
+}
+
+.sqltableodd {
+/*	margin-right: 10px; */
+	font-size: 12px;
+	background-color: #d8d8d8;
+	color: black;
+}
+

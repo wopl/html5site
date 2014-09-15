@@ -23,6 +23,20 @@
         
         <title>HTML5 page</title>
         <link href="css/style.css" rel="stylesheet" type="text/css">
+
+		<!-- add script for zebra-table -->
+		<sript src="jquery.js"></script>
+        <script>
+		$(function(){
+//			$('#cssmenu').hide().fadeIn(4000);
+			$('.sqltable tr:first-child').addClass('sqltableone');
+			$('.sqltable tr:nth-child(even)').addClass('sqltableeven');
+			$('.sqltable tr:nth-child(2n+3)').addClass('sqltableodd');
+			});
+		</script>
+
+
+
     </head>
 
 <!-- ---------------------------------------------------------------------------- -->
