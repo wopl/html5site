@@ -13,7 +13,10 @@ database
 	<tr><th>Lorem</th><th>ipsum</th></tr>
 	<tr><th>Lorem</th><th>ipsum</th></tr>
 </table>
-
+<button onclick="JavaScript: alert ('clicked')" >
+	Edit
+    </button>
+<a href="http://www.heise.de" class="cssmenu">css button</a>
 <!--
 
 $username="db11197344-root";
@@ -78,11 +81,55 @@ while ($result = $query->fetch_object())
 		. "<td>" . "{$result->user}" . "</td>"
 		. "<td>" . "{$result->firstname}" . "</td>"
 		. "<td>" . "{$result->lastname}" . "</td>"
+
+. "<form action='index.php?section=database' method='post'>" 
+. "<td>" . "<button onclick=\"JavaScript: alert ('clicked')\">EditTable</button>" . "</td>"
+. "<td>" . "<a href=\"http://www.google.de\" class=\"css_btn_class\">css button</a>" . "</td>"
+. "<td>" . "<input id='uid' name='myline' value=" . "{$result->user}" . "></td>"
+. "<td>" . "<input type='submit' value='edit' />" . "</td>"
+. "</form>"
+
+
+
+
 		. "</tr>\n";
 	}
-echo "</table>";
+echo "</table><br />";
+
+echo "<br>was ist das denn hier<br>";
+
+?>
+
+<form action="index.php?section=database" method="post">
+	Ihr Vorname: <br />
+	<input type="text" name="vorname" size="20" value="<?php echo $_POST["myline"]; ?>" maxlength="30" />
+    <br />
+	Ihr Nachname: <br />
+	<input type="text" name="nachname" size="20" maxlength="30" />
+	<br />
+	<input type="submit" value="send" />
+    
+    <br />test<br />
+
+	<?php
+	echo "hugo<br />";
+	echo $_SERVER["PHP_SELF"] . "<br />";
+	echo $section . "<br />";
+	echo "emil<br />";
+	echo $_POST["vorname"] . "<br />";
+	echo "myline: " . $_POST["myline"] . "<br />";
+	?>
+</form>
+
+<?php
+
 $result->close();
 
+?>
+
+
+
+<?php
 
 $mysqli -> close();
 
