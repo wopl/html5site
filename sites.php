@@ -17,6 +17,12 @@
 		case "database":
 			include ("database.php");
 			break;
+		case "user":
+			include ("user.php");
+			break;
+		case "customer":
+			include ("customer.php");
+			break;
 		default:
 			include ("home.php");
 	}

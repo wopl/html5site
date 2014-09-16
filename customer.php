@@ -1,10 +1,10 @@
 <!-- ---------------------------------------------------------------------------- -->
 <!--                                                                              -->
-<!-- database.php                                  (c) Wolfram Plettscher 09/2014 -->
+<!-- customer.php                                  (c) Wolfram Plettscher 09/2014 -->
 <!--                                                                              -->
 <!-- ---------------------------------------------------------------------------- -->
 
-database
+customer
 <br />
 
 <table class="sqltable">
@@ -13,32 +13,6 @@ database
 	<tr><th>Lorem</th><th>ipsum</th></tr>
 	<tr><th>Lorem</th><th>ipsum</th></tr>
 </table>
-<button onclick="JavaScript: alert ('clicked')" >
-	Edit
-    </button>
-<a href="http://www.heise.de" class="cssmenu">css button</a>
-<!--
-
-$username="db11197344-root";
-$password="linux4me";
-$database="db11197344-protrack";
-$host="localhost";
-$conn=mysql_connect('localhost','db11197344-root','linux4me');
-mysql_select_db($database);
-
-$select="SELECT clicks FROM counter WHERE id='home'";
-$result=mysql_query($select);
-$row=mysql_fetch_array($result);
-$update="UPDATE counter SET clicks = clicks+1 WHERE id='home'";
-$change=mysql_query($update);
-
-echo "Die Seite wurde ";
-echo $row["clicks"];
-echo " Mal angesehen";
-
-mysql_close($conn);
-
--->
 
 <?php
 include "mysql/credentials.inc";
@@ -92,7 +66,7 @@ echo "</table><br />";
 echo "<br>was ist das denn hier<br>";
 
 ?>
-
+hug0
 <form action="index.php?section=database" method="post">
 	Ihr Vorname: <br />
 	<input type="text" name="vorname" size="20" value="<?php echo $_POST["myline"]; ?>" maxlength="30" />
