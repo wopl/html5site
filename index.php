@@ -77,10 +77,11 @@
     <body>
 
         <div id="wrapper">
-            <div id="header">
+
+<!--            <div id="header">
                 header
             </div>
-            
+-->            
             <div id="cssmenu">
 				<?php include ("menu.php"); ?>
             </div>

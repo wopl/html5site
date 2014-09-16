@@ -8,20 +8,32 @@
 
 	switch ($section)
 	{
-		case "about":
-			include ("about.php");
+		case "workplace":
+			include ("workplace.php");
 			break;
-		case "contact":
-			include ("contact.php");
+		case "travel":
+			include ("travel.php");
 			break;
-		case "database":
-			include ("database.php");
-			break;
+//		case "about":
+//			include ("about.php");
+//			break;
+//		case "contact":
+//			include ("contact.php");
+//			break;
+//		case "database":
+//			include ("database.php");
+//			break;
 		case "user":
 			include ("user.php");
 			break;
 		case "customer":
 			include ("customer.php");
+			break;
+		case "reports":
+			include ("reports.php");
+			break;
+		case "logout":
+			include ("logout.php");
 			break;
 		default:
 			include ("home.php");

@@ -1,8 +1,7 @@
 <!-- ---------------------------------------------------------------------------- -->
 <!--                                                                              -->
-<!-- home.php                                      (c) Wolfram Plettscher 09/2014 -->
+<!-- reports.php                                   (c) Wolfram Plettscher 09/2014 -->
 <!--                                                                              -->
 <!-- ---------------------------------------------------------------------------- -->
 
-This is the first landing page<br />
-Well, there is nothing in yet :-)
+Reports
