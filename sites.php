@@ -29,6 +29,12 @@
 		case "customer":
 			include ("customer.php");
 			break;
+		case "customer2":
+			include ("customer2.php");
+			break;
+		case "worksteps":
+			include ("worksteps.php");
+			break;
 		case "reports":
 			include ("reports.php");
 			break;

@@ -4,6 +4,8 @@
 <!--                                                                              -->
 <!-- ---------------------------------------------------------------------------- -->
 
+<h1>Verwaltung Benutzer</h1>
+
 <?php
 include "mysql/credentials.inc";
 
@@ -23,7 +25,10 @@ if (isset($_POST['new'])) {
 	$myuser = $_POST['username'];
 	$myfirstname = $_POST['vorname'];
 	$mylastname = $_POST['nachname'];
-	$query = $mysqli->query ("INSERT INTO user (user, firstname, lastname) VALUES ('$myuser', '$myfirstname', '$mylastname')");
+	$myemail = $_POST['email'];
+	$myphone = $_POST['phone'];
+	$query = $mysqli->query ("	INSERT INTO user	(user, firstname, lastname, email, phone)
+								VALUES				('$myuser', '$myfirstname', '$mylastname', '$myemail', '$myphone')");
 } elseif (isset($_POST['delete'])) {
 	$myuserid = $_POST['userid'];
 	$query = $mysqli->query ("DELETE FROM user WHERE id='$myuserid'");
@@ -32,7 +37,15 @@ if (isset($_POST['new'])) {
 	$myuser = $_POST['username'];
 	$myfirstname = $_POST['vorname'];
 	$mylastname = $_POST['nachname'];
-	$query = $mysqli->query ("UPDATE user SET user='$myuser', firstname='$myfirstname', lastname='$mylastname' WHERE id='$myuserid'");
+	$myemail = $_POST['email'];
+	$myphone = $_POST['phone'];
+	$query = $mysqli->query ("UPDATE user SET
+		 user='$myuser',
+		 firstname='$myfirstname',
+		 lastname='$mylastname',
+		 email='$myemail',
+		 phone='$myphone'
+		 WHERE id='$myuserid'");
 } else {
 	echo "";
 }
@@ -41,7 +54,7 @@ if (isset($_POST['new'])) {
 //-----------------------------------------------------------------------------------
 // show user-table                                                      ---
 //-----------------------------------------------------------------------------------
-$query = $mysqli->query ("SELECT id, user, firstname, lastname FROM user");
+$query = $mysqli->query ("SELECT id, user, firstname, lastname, email, phone FROM user");
 
 echo "<table class='sqltable' border='0' cellspacing='0' cellpadding='2' >\n";
 
@@ -50,6 +63,8 @@ echo "<tr>
 	<th> User </th>
 	<th> Vorname </th>
 	<th> Nachname </th>
+	<th> Mail </th>
+	<th> Telefon </th>
 	</tr>\n";
 	
 while ($result = $query->fetch_object())
@@ -58,16 +73,20 @@ while ($result = $query->fetch_object())
 		. "<td>" . "{$result->user}" . "</td>"
 		. "<td>" . "{$result->firstname}" . "</td>"
 		. "<td>" . "{$result->lastname}" . "</td>"
+		. "<td>" . "{$result->email}" . "</td>"
+		. "<td>" . "{$result->phone}" . "</td>"
 		. "<form action='index.php?section=user' method='post'>" 
-			. "<td>" . "<input type='hidden' id='uid1' name='r_userid' value=" . "{$result->id}" . "></td>"
-			. "<td>" . "<input type='hidden' id='uid2' name='r_username' value=" . "{$result->user}" . "></td>"
-			. "<td>" . "<input type='hidden' id='uid3' name='r_firstname' value=" . "{$result->firstname}" . "></td>"
-			. "<td>" . "<input type='hidden' id='uid4' name='r_lastname' value=" . "{$result->lastname}" . "></td>"
+			. "<td>" . "<input type='hidden' id='uid1' name='r_userid' value=" . "'{$result->id}'" . "></td>"
+			. "<td>" . "<input type='hidden' id='uid2' name='r_username' value=" . "'{$result->user}'" . "></td>"
+			. "<td>" . "<input type='hidden' id='uid3' name='r_firstname' value=" . "'{$result->firstname}'" . "></td>"
+			. "<td>" . "<input type='hidden' id='uid4' name='r_lastname' value=" . "'{$result->lastname}'" . "></td>"
+			. "<td>" . "<input type='hidden' id='uid5' name='r_email' value=" . "'{$result->email}'" . "></td>"
+			. "<td>" . "<input type='hidden' id='uid6' name='r_phone' value=" . "'{$result->phone}'" . "></td>"
 			. "<td>" . "<input class='css_btn_class' type='submit' value='edit' />" . "</td>"
 		. "</form>"
 		. "</tr>";
 	}
-echo "</table><br />";
+echo "</table><br /><br />";
 ?>
 
 <form action="index.php?section=user" method="post">
@@ -75,16 +94,24 @@ echo "</table><br />";
 	<table>
     	<tr>
          	<td>User-ID: </td>
-        	<td><input type="text" name="userid" size="20" value="<?php echo $_POST["r_userid"]; ?>" maxlength="30" readonly/></td>
+        	<td><input type="text" name="userid" size="20" value="<?php echo $_POST["r_userid"]; ?>" maxlength="30" tabindex="1" readonly/></td>
+        	<td>Vorname: </td>
+        	<td><input type="text" name="vorname" size="40" value="<?php echo $_POST["r_firstname"]; ?>" maxlength="64" tabindex="3"/></td>
         </tr><tr>
 	       	<td>User-Name: </td>
-        	<td><input type="text" name="username" size="20" value="<?php echo $_POST["r_username"]; ?>" maxlength="30" /></td>
-        </tr><tr>
-        	<td>Vorname: </td>
-        	<td><input type="text" name="vorname" size="20" value="<?php echo $_POST["r_firstname"]; ?>" maxlength="30" /></td>
-        </tr><tr>
+        	<td><input type="text" name="username" size="20" value="<?php echo $_POST["r_username"]; ?>" maxlength="30" tabindex="2"/></td>
         	<td>Nachname: </td>
-        	<td><input type="text" name="nachname" size="20" value="<?php echo $_POST["r_lastname"]; ?>" maxlength="30" /></td>
+        	<td><input type="text" name="nachname" size="40" value="<?php echo $_POST["r_lastname"]; ?>" maxlength="64" tabindex="4"/></td>
+        </tr><tr>
+			<td></td>
+            <td></td>
+        	<td>E-Mail: </td>
+        	<td><input type="text" name="email" size="40" value="<?php echo $_POST["r_email"]; ?>" maxlength="64" tabindex="5"/></td>
+        </tr><tr>
+			<td></td>
+            <td></td>
+        	<td>Telefon: </td>
+        	<td><input type="text" name="phone" size="40" value="<?php echo $_POST["r_phone"]; ?>" maxlength="64" tabindex="6"/></td>
         </tr>
     </table>
 	<br />

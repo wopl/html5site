@@ -34,21 +34,26 @@
 	?>
 
 	<?php
-		if (($section == "user") || ($section == "customer")){
+		if (($section == "user") || ($section == "customer") || ($section == "worksteps")){
 			echo "<li class='active has-sub'><a href='#'><span>Verwaltung</span></a>";
 		} else {
 			echo "<li class='has-sub'><a href='#'><span>Verwaltung</span></a>";
 		}
 		echo "<ul>";		
 			if ($section == "user"){
-				echo "<li class='active last'><a href='index.php?section=user'><span>Benutzer</span></a>";
+				echo "<li class='active'><a href='index.php?section=user'><span>Benutzer</span></a>";
 			} else {
 				echo "<li><a href='index.php?section=user'><span>Benutzer</span></a>";
 			}
 			if ($section == "customer"){
-				echo "<li class='active last'><a href='index.php?section=customer'><span>Kunden</span></a>";
+				echo "<li class='active'><a href='index.php?section=customer'><span>Kunden</span></a>";
 			} else {
-				echo "<li class='last'><a href='index.php?section=customer'><span>Kunden</span></a>";
+				echo "<li><a href='index.php?section=customer'><span>Kunden</span></a>";
+			}
+			if ($section == "worksteps"){
+				echo "<li class='active last'><a href='index.php?section=worksteps'><span>Arbeitsschritte</span></a>";
+			} else {
+				echo "<li class='last'><a href='index.php?section=worksteps'><span>Arbeitsschritte</span></a>";
 			}
 		echo "</ul></li>";
 	?>
