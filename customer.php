@@ -50,6 +50,7 @@ if (isset($_POST['new'])) {
 
 } elseif (isset($_POST['delete'])) {
 	$query = $mysqli->query ("DELETE FROM workplace WHERE id='$mycustid'");
+	$query = $mysqli->query ("DELETE FROM user2work WHERE workid='$mycustid'");
 
 } elseif (isset($_POST['change'])) {
 	$query = $mysqli->query ("UPDATE workplace SET
@@ -109,7 +110,7 @@ while ($result = $query->fetch_object())
 			. "<td>" . "<input type='hidden' id='uid7' name='r_street' value=" . "'{$result->street}'" . "></td>"
 			. "<td>" . "<input type='hidden' id='uid8' name='r_number' value=" . "'{$result->number}'" . "></td>"
 			. "<td>" . "<input type='hidden' id='uid9' name='r_locremark' value=" . "'{$result->locremark}'" . "></td>"
-			. "<td>" . "<input type='hidden' id='uid10' name='r_contact' value=" . "{$result->contact}" . "></td>"
+			. "<td>" . "<input type='hidden' id='uid10' name='r_contact' value=" . "'{$result->contact}'" . "></td>"
 			. "<td>" . "<input type='hidden' id='uid11' name='r_phone' value=" . "'{$result->phone}'" . "></td>"
 			. "<td>" . "<input type='hidden' id='uid12' name='r_active' value=" . "'{$result->active}'" . "></td>"
 			. "<td>" . "<input type='hidden' id='uid13' name='r_flags' value=" . "'{$result->flags}'" . "></td>"
@@ -117,18 +118,18 @@ while ($result = $query->fetch_object())
 		. "</form>"
 		. "<form action='index.php?section=customer2' method='post'>" 
 			. "<td>" . "<input type='hidden' id='uid1' name='r_custid' value=" . "'{$result->id}'" . "></td>"
-			. "<td>" . "<input type='hidden' id='uid2' name='r_short' value=" . "'{$result->short}'" . "></td>"
-			. "<td>" . "<input type='hidden' id='uid3' name='r_customer' value=" . "'{$result->kunde}'" . "></td>"
-			. "<td>" . "<input type='hidden' id='uid4' name='r_country' value=" . "'{$result->country}'" . "></td>"
-			. "<td>" . "<input type='hidden' id='uid5' name='r_zip' value=" . "'{$result->zip}'" . "></td>"
-			. "<td>" . "<input type='hidden' id='uid6' name='r_town' value=" . "'{$result->town}'" . "></td>"
-			. "<td>" . "<input type='hidden' id='uid7' name='r_street' value=" . "'{$result->street}'" . "></td>"
-			. "<td>" . "<input type='hidden' id='uid8' name='r_number' value=" . "'{$result->number}'" . "></td>"
-			. "<td>" . "<input type='hidden' id='uid9' name='r_locremark' value=" . "'{$result->locremark}'" . "></td>"
-			. "<td>" . "<input type='hidden' id='uid10' name='r_contact' value=" . "'{$result->contact}'" . "></td>"
-			. "<td>" . "<input type='hidden' id='uid11' name='r_phone' value=" . "'{$result->phone}'" . "></td>"
-			. "<td>" . "<input type='hidden' id='uid12' name='r_active' value=" . "'{$result->active}'" . "></td>"
-			. "<td>" . "<input type='hidden' id='uid13' name='r_flags' value=" . "'{$result->flags}'" . "></td>"
+//			. "<td>" . "<input type='hidden' id='uid2' name='r_short' value=" . "'{$result->short}'" . "></td>"
+//			. "<td>" . "<input type='hidden' id='uid3' name='r_customer' value=" . "'{$result->kunde}'" . "></td>"
+//			. "<td>" . "<input type='hidden' id='uid4' name='r_country' value=" . "'{$result->country}'" . "></td>"
+//			. "<td>" . "<input type='hidden' id='uid5' name='r_zip' value=" . "'{$result->zip}'" . "></td>"
+//			. "<td>" . "<input type='hidden' id='uid6' name='r_town' value=" . "'{$result->town}'" . "></td>"
+//			. "<td>" . "<input type='hidden' id='uid7' name='r_street' value=" . "'{$result->street}'" . "></td>"
+//			. "<td>" . "<input type='hidden' id='uid8' name='r_number' value=" . "'{$result->number}'" . "></td>"
+//			. "<td>" . "<input type='hidden' id='uid9' name='r_locremark' value=" . "'{$result->locremark}'" . "></td>"
+//			. "<td>" . "<input type='hidden' id='uid10' name='r_contact' value=" . "'{$result->contact}'" . "></td>"
+//			. "<td>" . "<input type='hidden' id='uid11' name='r_phone' value=" . "'{$result->phone}'" . "></td>"
+//			. "<td>" . "<input type='hidden' id='uid12' name='r_active' value=" . "'{$result->active}'" . "></td>"
+//			. "<td>" . "<input type='hidden' id='uid13' name='r_flags' value=" . "'{$result->flags}'" . "></td>"
 			. "<td>" . "<input class='css_btn_class' type='submit' value='select' />" . "</td>"
 		. "</form>"
 		. "</tr>";
