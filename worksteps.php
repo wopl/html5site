@@ -22,11 +22,12 @@ if (mysqli_connect_errno()) {
 //-----------------------------------------------------------------------------------
 $myid = $_POST['id'];
 $myshort = $_POST['short'];
+$mybudget = $_POST['budget'];
 $mydescription = $_POST['description'];
 
 if (isset($_POST['new'])) {
-	$query = $mysqli->query ("	INSERT INTO worksteps (id, short, description)
-								VALUES				('$myid', '$myshort', '$mydescription')");
+	$query = $mysqli->query ("	INSERT INTO worksteps (id, short, budget, description)
+								VALUES				('$myid', '$myshort', $mybudget, '$mydescription')");
 
 } elseif (isset($_POST['delete'])) {
 	$query = $mysqli->query ("DELETE FROM worksteps WHERE id='$myid'");
@@ -34,7 +35,8 @@ if (isset($_POST['new'])) {
 } elseif (isset($_POST['change'])) {
 	$query = $mysqli->query ("UPDATE worksteps SET
 		 short='$myshort',
-		 description='$mydescription',
+		 budget='$mybudget',
+		 description='$mydescription'
 		 WHERE id='$myid'");
 } else {
 	echo "";
@@ -44,13 +46,14 @@ if (isset($_POST['new'])) {
 //-----------------------------------------------------------------------------------
 // show worksteps-table                                                      ---
 //-----------------------------------------------------------------------------------
-$query = $mysqli->query ("SELECT id, short, description FROM worksteps");
+$query = $mysqli->query ("SELECT id, short, budget, description FROM worksteps");
 
 echo "<table class='sqltable' border='0' cellspacing='0' cellpadding='2' >\n";
 
 echo "<tr>
 	<th> ID </th>
 	<th> K&uumlrzel </th>
+	<th> Budget </th>
 	<th> Beschreibung </th>
 	</tr>\n";
 
@@ -58,11 +61,13 @@ while ($result = $query->fetch_object())
 	{
 	echo "<tr><td>" . "{$result->id}" . "</td>"
 		. "<td>" . "{$result->short}" . "</td>"
+		. "<td>" . "{$result->budget}" . "h</td>"
 		. "<td>" . "{$result->description}" . "</td>"
 		. "<form action='index.php?section=worksteps' method='post'>" 
 			. "<td>" . "<input type='hidden' id='uid1' name='r_id' value=" . "'{$result->id}'" . "></td>"
 			. "<td>" . "<input type='hidden' id='uid2' name='r_short' value=" . "'{$result->short}'" . "></td>"
-			. "<td>" . "<input type='hidden' id='uid3' name='r_description' value=" . "'{$result->description}'" . "></td>"
+			. "<td>" . "<input type='hidden' id='uid3' name='r_budget' value=" . "'{$result->budget}'" . "></td>"
+			. "<td>" . "<input type='hidden' id='uid4' name='r_description' value=" . "'{$result->description}'" . "></td>"
 			. "<td>" . "<input class='css_btn_class' type='submit' value='edit' />" . "</td>"
 		. "</form>"
 		. "</tr>";
@@ -82,6 +87,8 @@ echo "</table><br /><br />";
         </tr><tr>
 	       	<td>K&uumlrzel: </td>
         	<td><input type="text" name="short" size="20" value="<?php echo $_POST["r_short"]; ?>" maxlength="30" tabindex="2"/></td>
+        	<td>Budget: </td>
+        	<td><input type="number" min="0" step="0.1" name="budget" size="20" value="<?php echo $_POST["r_budget"]; ?>" maxlength="16" tabindex="4"/> Stunden</td>
        </tr>
     </table>
 	<br />

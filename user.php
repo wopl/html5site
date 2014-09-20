@@ -21,24 +21,22 @@ if (mysqli_connect_errno()) {
 // react on previously pushed button to update mySQL database                                                     ---
 //-----------------------------------------------------------------------------------
 
-if (isset($_POST['new'])) {
+	$myuserid = $_POST['userid'];
 	$myuser = $_POST['username'];
 	$myfirstname = $_POST['vorname'];
 	$mylastname = $_POST['nachname'];
 	$myemail = $_POST['email'];
 	$myphone = $_POST['phone'];
+
+if (isset($_POST['new'])) {
 	$query = $mysqli->query ("	INSERT INTO user	(user, firstname, lastname, email, phone)
 								VALUES				('$myuser', '$myfirstname', '$mylastname', '$myemail', '$myphone')");
+
 } elseif (isset($_POST['delete'])) {
-	$myuserid = $_POST['userid'];
 	$query = $mysqli->query ("DELETE FROM user WHERE id='$myuserid'");
+	$query = $mysqli->query ("DELETE FROM user2work WHERE userid='$myuserid'");
+
 } elseif (isset($_POST['change'])) {
-	$myuserid = $_POST['userid'];
-	$myuser = $_POST['username'];
-	$myfirstname = $_POST['vorname'];
-	$mylastname = $_POST['nachname'];
-	$myemail = $_POST['email'];
-	$myphone = $_POST['phone'];
 	$query = $mysqli->query ("UPDATE user SET
 		 user='$myuser',
 		 firstname='$myfirstname',
@@ -46,10 +44,7 @@ if (isset($_POST['new'])) {
 		 email='$myemail',
 		 phone='$myphone'
 		 WHERE id='$myuserid'");
-} else {
-	echo "";
-}
-
+} 
 
 //-----------------------------------------------------------------------------------
 // show user-table                                                      ---
