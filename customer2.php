@@ -33,8 +33,6 @@ if (mysqli_connect_errno()) {
 	$mycustid		= $_POST['r_custid'];	
 	$myuserid		= $_POST['r_userid'];
 	$mystepid		= $_POST['r_stepid'];
-//	echo "User-Id: " . 	$myuserid . "<br />";
-//	echo "Cust-Id: ". $mycustid . "<br />";
 
     $query = $mysqli->query ("SELECT short, kunde, country, zip, town, street, number, 
 							locremark, contact, phone, active, flags FROM workplace WHERE id='$mycustid'");

@@ -11,6 +11,12 @@
 		case "workplace":
 			include ("workplace.php");
 			break;
+		case "workplace2":
+			include ("workplace2.php");
+			break;
+		case "workplace3":
+			include ("workplace3.php");
+			break;
 		case "travel":
 			include ("travel.php");
 			break;

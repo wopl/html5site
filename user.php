@@ -4,7 +4,7 @@
 <!--                                                                              -->
 <!-- ---------------------------------------------------------------------------- -->
 
-<h1>Verwaltung Benutzer</h1>
+<h1>Verwaltung Benutzer / Monteure</h1>
 
 <?php
 include "mysql/credentials.inc";

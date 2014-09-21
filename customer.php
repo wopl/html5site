@@ -4,7 +4,7 @@
 <!--                                                                              -->
 <!-- ---------------------------------------------------------------------------- -->
 
-<h1>Verwaltung Kunden</h1>
+<h1>Verwaltung Kunden / Baustellen</h1>
 
 <?php
 include "mysql/credentials.inc";
@@ -74,7 +74,7 @@ if (isset($_POST['new'])) {
 
 
 //-----------------------------------------------------------------------------------
-// show user-table                                                      ---
+// show workplace-table                                                      ---
 //-----------------------------------------------------------------------------------
 $query = $mysqli->query ("SELECT id, short, kunde, country, zip, town, street, number, locremark, contact, phone, active, flags FROM workplace");
 
