@@ -52,6 +52,9 @@ echo "<tr>
 	<th> PLZ </th>
 	<th> Stadt </th>
 	<th> Stra&szlige </th>
+	<th></th>
+	<th></th>
+	<th></th>
 	</tr>\n";
 	
 while ($result = $query->fetch_object())

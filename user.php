@@ -60,6 +60,13 @@ echo "<tr>
 	<th> Nachname </th>
 	<th> Mail </th>
 	<th> Telefon </th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
 	</tr>\n";
 	
 while ($result = $query->fetch_object())

@@ -22,6 +22,7 @@ if (mysqli_connect_errno()) {
 
 $myuserid	= $_POST['r_userid'];
 $mycustid	= $_POST['r_custid'];
+$mystepid	= $_POST['r_stepid'];
 
 //-----------------------------------------------------------------------------------
 // show user data
@@ -78,29 +79,35 @@ echo "Ansprechpartner: " .
 //-----------------------------------------------------------------------------------
 // show worksteps-table                                                      ---
 //-----------------------------------------------------------------------------------
-$query = $mysqli->query ("SELECT id, short, budget, description FROM worksteps");
+$query = $mysqli->query ("SELECT stepid, short, description, status FROM step2work WHERE workid = '$mycustid'");
 
 echo "<table class='sqltable' border='0' cellspacing='0' cellpadding='2' >\n";
 
 echo "<tr>
 	<th> ID </th>
 	<th> K&uumlrzel </th>
-	<th> Budget </th>
 	<th> Beschreibung </th>
+	<th> Status </th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
 	</tr>\n";
 
 while ($result = $query->fetch_object())
 	{
-	echo "<tr><td>" . "{$result->id}" . "</td>"
+	//-----------------------------------------------------------------------------------
+	// show worksteps details                                                      ---
+	//-----------------------------------------------------------------------------------
+	echo "<tr><td>" . "{$result->stepid}" . "</td>"
 		. "<td>" . "{$result->short}" . "</td>"
-		. "<td>" . "{$result->budget}" . "h</td>"
 		. "<td>" . "{$result->description}" . "</td>"
-		. "<form action='index.php?section=worksteps' method='post'>" 
-			. "<td>" . "<input type='hidden' id='uid1' name='r_id' value=" . "'{$result->id}'" . "></td>"
-			. "<td>" . "<input type='hidden' id='uid2' name='r_short' value=" . "'{$result->short}'" . "></td>"
-			. "<td>" . "<input type='hidden' id='uid3' name='r_budget' value=" . "'{$result->budget}'" . "></td>"
-			. "<td>" . "<input type='hidden' id='uid4' name='r_description' value=" . "'{$result->description}'" . "></td>"
-			. "<td>" . "<input class='css_btn_class' type='submit' value='edit' />" . "</td>"
+		. "<td>" . "{$result->status}" . "</td>"
+		. "<form action='index.php?section=workplace4' method='post'>" 
+			. "<td>" . "<input type='hidden' id='uid1' name='r_userid' value=" . "'$myuserid'" . "></td>"
+			. "<td>" . "<input type='hidden' id='uid2' name='r_custid' value=" . "'$mycustid'" . "></td>"
+			. "<td>" . "<input type='hidden' id='uid3' name='r_stepid' value=" . "'$result->stepid'" . "></td>"
+			. "<td>" . "<input class='css_btn_class' type='submit' value='select' />" . "</td>"
 		. "</form>"
 		. "</tr>";
 	}

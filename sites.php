@@ -17,6 +17,9 @@
 		case "workplace3":
 			include ("workplace3.php");
 			break;
+		case "workplace4":
+			include ("workplace4.php");
+			break;
 		case "travel":
 			include ("travel.php");
 			break;
