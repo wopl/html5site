@@ -4,7 +4,7 @@
 <!--                                                                              -->
 <!-- ---------------------------------------------------------------------------- -->
 
-<h1>Zeiterfassung Baustelle</h1>
+<h1>Zeiterfassung - Auswahl Arbeitsschritt</h1>
 
 <?php
 include "mysql/credentials.inc";

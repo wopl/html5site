@@ -4,7 +4,7 @@
 <!--                                                                              -->
 <!-- ---------------------------------------------------------------------------- -->
 
-<h1>Zeiterfassung Baustelle (2)</h1>
+<h1>Zeiterfassung Baustelle</h1>
 
 <?php
 include "mysql/credentials.inc";
@@ -50,10 +50,54 @@ if (isset($_POST['new'])) {
 								VALUES
 								('$mycustid', 'def', '$myuserid', 'def', '$mystepid', 'def', DATE(NOW()), TIME(NOW()), '$myend')");
 
+	$query = $mysqli->query ("UPDATE step2work SET status='gestartet' 
+							  WHERE workid = '$mycustid'
+							  AND   stepid = '$mystepid'");
+
+// "end now" button pressed
+// - check, if an open record from this day exists, then update end time
+// - if no such record exists, then insert a new record with missing start time
+// - update status of step2work table
+} elseif (isset($_POST['stop']) || isset($_POST['pause'])) {
+	$query = $mysqli->query ("SELECT id FROM timerecord
+							WHERE custid = '$mycustid'
+							AND	  userid = '$myuserid'
+							AND   stepid = '$mystepid'
+							AND   t_date = DATE(NOW())
+							AND   t_end  = '00:00:00'");		
+
+	if ($result = $query->fetch_object()) {
+//		echo "ID = $result->id";
+		$query = $mysqli->query ("UPDATE timerecord SET t_end = TIME(NOW())
+								  WHERE id = '$result->id'");
+	} else {
+//		echo "no record found";
+		$query = $mysqli->query ("	INSERT INTO timerecord
+									(custid, custshort, userid, usershort, stepid, stepshort, t_date, t_start, t_end)
+									VALUES
+									('$mycustid', 'def', '$myuserid', 'def', '$mystepid', 'def', DATE(NOW()), '$mystart', TIME(NOW()) )");
+	}
+
+	// after having updated the timerecord entry, now update the status
+	if (isset($_POST['stop'])) {
+		// set status "beendet"
+		$query = $mysqli->query ("UPDATE step2work SET status='beendet' 
+								  WHERE workid = '$mycustid'
+								  AND   stepid = '$mystepid'");
+	} else {
+		// this happens only if 'pause' buton has pressed
+		// set status "gestartet"
+		// ... it should already have this startus, except this is the first entry on time-record
+		// ... for simplicity we always do the update
+		$query = $mysqli->query ("UPDATE step2work SET status='gestartet' 
+								  WHERE workid = '$mycustid'
+								  AND   stepid = '$mystepid'");
+	}
+
 //} else {
 //	echo "";
 }
-//-----------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------
 // show user data
 //-----------------------------------------------------------------------------------
 
@@ -121,9 +165,9 @@ echo "<b>" .
 	 " " .
 	 "$result->short" .
 	 "</b> " .
-	 " Status:" .
+	 " Status: <b>" .
 	 "$result->status" .
-	 " Budget:" .
+	 "</b> Budget: " .
 	 "$result2->budget" .
 	 " Stunden" .
 	 "<br />";
@@ -139,12 +183,12 @@ echo "<b>" .
 	<br />
 	<table>
     	<tr>
-		<td><input type='hidden' id='uid1' name='r_userid' value='<?php echo "$myuserid" ?>'/></td>
-		<td><input type='hidden' id='uid1' name='r_custid' value='<?php echo "$mycustid" ?>'/></td>
-		<td><input type='hidden' id='uid1' name='r_stepid' value='<?php echo "$mystepid" ?>'/></td>
  		<td><input class='css_btn_class' name='start' type='submit' value='begin now' /></td>
  		<td><input class='css_btn_class' name='stop' type='submit' value='end now' /></td>
  		<td><input class='css_btn_class' name='pause' type='submit' value='pause now' /></td>
+		<td><input type='hidden' id='uid1' name='r_userid' value='<?php echo "$myuserid" ?>'/></td>
+		<td><input type='hidden' id='uid2' name='r_custid' value='<?php echo "$mycustid" ?>'/></td>
+		<td><input type='hidden' id='uid3' name='r_stepid' value='<?php echo "$mystepid" ?>'/></td>
         </tr>
     </table>
 </form>
@@ -156,7 +200,8 @@ echo "<b>" .
 $query = $mysqli->query ("SELECT id, t_date, t_start, t_end FROM timerecord
 						  WHERE custid='$mycustid'
 						  AND   userid='$myuserid'
-						  AND   stepid='$mystepid'");
+						  AND   stepid='$mystepid'
+						  ORDER BY t_date DESC, t_start DESC, t_end DESC");
 
 echo "<table class='sqltable' border='0' cellspacing='0' cellpadding='2' >\n";
 
@@ -240,9 +285,9 @@ echo "</table><br /><br >";
 	<br />
 	<table>
     	<tr>
+ 		<td><input class='css_btn_class' name='back' type='submit' value='back' /></td>
 		<td><input type='hidden' id='uid1' name='r_userid' value='<?php echo "$myuserid" ?>'/></td>
 		<td><input type='hidden' id='uid2' name='r_custid' value='<?php echo "$mycustid" ?>'/></td>
- 		<td><input class='css_btn_class' name='back' type='submit' value='back' /></td>
         </tr>
     </table>
 </form>

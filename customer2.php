@@ -5,14 +5,6 @@
 <!-- ---------------------------------------------------------------------------- -->
 
 <h1>Zuordnung Monteure / Arbeitsschritte</h1>
-<form action="index.php?section=customer" method="post">
-	<br />
-	<table>
-    	<tr>
- 		<td><input class='css_btn_class' name='back' type='submit' value='back' /></td>
-        </tr>
-    </table>
-</form>
 
 <?php
 include "mysql/credentials.inc";
@@ -137,6 +129,9 @@ echo "Ansprechpartner: " .
                 <th> User </th>
                 <th> Vorname </th>
                 <th> Nachname </th>
+				<th></th>
+				<th></th>
+				<th></th>
                 </tr>\n";
             while ($result = $query->fetch_object())
                 {
@@ -185,6 +180,9 @@ echo "Ansprechpartner: " .
                 <th> ID </th>
                 <th> K&uumlrzel </th>
                 <th> Beschreibung </th>
+				<th></th>
+				<th></th>
+				<th></th>
                 </tr>\n";
             while ($result = $query->fetch_object())
                 {

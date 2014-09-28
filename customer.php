@@ -4,8 +4,14 @@
 <!--                                                                              -->
 <!-- ---------------------------------------------------------------------------- -->
 
-<h1>Verwaltung Kunden / Baustellen</h1>
+<!--
+<table width="980px"><tr>
+	<td align="left" valign="middle"><h1>Verwaltung Kunden / Baustellen</h1></td>
+	<td align="right" valign="top"><img src="pics/bf_small.jpg" alt="Bluefish Logo" width="100px"/></td>
+</tr></table>
+-->
 
+<h1>Verwaltung Kunden /Baustellen</h1>
 <?php
 include "mysql/credentials.inc";
 
@@ -88,6 +94,22 @@ echo "<tr>
 	<th> Stadt </th>
 	<th> Stra&szlige </th>
 	<th> Aktiv </th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
 	</tr>\n";
 	
 while ($result = $query->fetch_object())
@@ -125,6 +147,7 @@ while ($result = $query->fetch_object())
 echo "</table><br /><br />";
 ?>
 
+<p>
 <form action="index.php?section=customer" method="post">
 
 	<table>
@@ -185,6 +208,7 @@ echo "</table><br /><br />";
     </table>
 
 </form>
+</p>
 
 <?php
 $result->close();

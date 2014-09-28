@@ -55,6 +55,11 @@ echo "<tr>
 	<th> K&uumlrzel </th>
 	<th> Budget </th>
 	<th> Beschreibung </th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
+	<th></th>
 	</tr>\n";
 
 while ($result = $query->fetch_object())
