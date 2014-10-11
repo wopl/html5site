@@ -209,6 +209,7 @@ echo "<tr>
 	<th> Datum </th>
 	<th> Kommen </th>
 	<th> Gehen </th>
+	<th> Stunden </th>
 	<th></th>
 	<th></th>
 	<th></th>
@@ -219,11 +220,35 @@ echo "<tr>
 	<th></th>
 	</tr>\n";
 
+$gesamtzeit = 0;
 while ($result = $query->fetch_object())
 	{
 	$mydate = $result->t_date;
 //	$mydate = date ('d.m.Y', strtotime($result->t_date));
 //	echo "$mydate";
+
+	if (($result->t_start != '00:00:00' ) && ($result->t_end != '00:00:00'))
+		{
+			$hours = "t.b.d.";
+			$seconds_e = strtotime ($result->t_end);
+			$seconds_s = strtotime ($result->t_start);
+			$ss = $seconds_e - $seconds_s;
+			$gesamtzeit += $ss;
+//			echo "Seconds: $seconds_s $seconds_e $seconds<br>";
+			$mm = floor($ss/60);
+			$ss = $ss%60;
+			if ($ss < 10) $ss = "0" . $ss;
+
+			$hh = floor($mm/60);
+			$mm = $mm%60;
+			if ($mm < 10) $mm = "0" . $mm;
+			if ($hh < 10) $hh = "0" . $hh;
+			
+			$hours = $hh . ":" . $mm . ":" . $ss;
+//			$hours = DateTime::diff ($result->t_end, $result->t_start);
+		} else {
+			$hours = "???";
+		}
 
 	//-----------------------------------------------------------------------------------
 	// show worksteps details                                                      ---
@@ -231,6 +256,7 @@ while ($result = $query->fetch_object())
 	echo "<tr><td>" . "$mydate" . "</td>"
 		. "<td>" . "{$result->t_start}" . "</td>"
 		. "<td>" . "{$result->t_end}" . "</td>"
+		. "<td>" . "$hours" . "</td>"
 		. "<form action='index.php?section=workplace4' method='post'>" 
 			. "<td>" . "<input type='hidden' id='uid1' name='r_userid' value=" . "'$myuserid'" . "></td>"
 			. "<td>" . "<input type='hidden' id='uid2' name='r_custid' value=" . "'$mycustid'" . "></td>"
@@ -245,7 +271,21 @@ while ($result = $query->fetch_object())
 
 	}
 	
-echo "</table><br /><br >";
+echo "</table><br />";
+
+$ss = $gesamtzeit;
+$mm = floor($ss/60);
+$ss = $ss%60;
+if ($ss < 10) $ss = "0" . $ss;
+
+$hh = floor($mm/60);
+$mm = $mm%60;
+if ($mm < 10) $mm = "0" . $mm;
+if ($hh < 10) $hh = "0" . $hh;
+
+$hours = $hh . ":" . $mm . ":" . $ss;
+
+echo "<b>Gebuchte Zeiten: $hours</b><br><br>";
 ?>
 
 <form action="index.php?section=workplace4" method="post">
